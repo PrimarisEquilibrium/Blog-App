@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render("Home");
-});
+Route::inertia("/", "Home")->name("home");
+
+Route::inertia("dashboard", "Dashboard")->name("dashboard");
+Route::inertia("login", "Auth/Login")->name("login");
+Route::inertia("register", "Auth/Register")->name("register");
