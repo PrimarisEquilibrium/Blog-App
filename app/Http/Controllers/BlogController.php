@@ -38,7 +38,8 @@ class BlogController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $blog = Blog::all()->find($id);
+        return Inertia::render("Blogs/Show", ["blog" => $blog]);
     }
 
     /**
