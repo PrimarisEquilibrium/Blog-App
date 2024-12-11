@@ -13,8 +13,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::all();
-        return Inertia::render("Blogs/Index", ["blogs" => $blogs->toArray()]);
+        $blogs = Blog::all()->toArray();
+        return Inertia::render("Blogs/Index", ["blogs" => $blogs]);
     }
 
     /**
@@ -22,7 +22,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render("Blogs/Create");
     }
 
     /**
@@ -36,9 +36,8 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Blog $blog)
     {
-        $blog = Blog::all()->find($id);
         return Inertia::render("Blogs/Show", ["blog" => $blog]);
     }
 
