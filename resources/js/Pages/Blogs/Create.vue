@@ -17,7 +17,13 @@ const onSubmit = () => {
     <form @submit.prevent="onSubmit">
         <div>
             <label for="title">Title: </label>
-            <input type="text" name="title" id="title" v-model="form.title" />
+            <input
+                type="text"
+                name="title"
+                id="title"
+                v-model="form.title"
+                required
+            />
         </div>
 
         <div>
@@ -27,6 +33,7 @@ const onSubmit = () => {
                 name="author"
                 id="author"
                 v-model="form.author"
+                required
             />
         </div>
 
@@ -36,6 +43,7 @@ const onSubmit = () => {
                 name="content"
                 id="content"
                 v-model="form.content"
+                required
             ></textarea>
         </div>
 

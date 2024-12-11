@@ -30,7 +30,15 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            "title" => ["required", "max:255", "string"],
+            "author" => ["required", "max:255", "string"],
+            "content" => ["required", "string"]
+        ]);
+
+        $blog = Blog::create($data);
+
+        return to_route("blogs.show", ["blog" => $blog->id]);
     }
 
     /**
