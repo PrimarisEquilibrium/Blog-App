@@ -1,5 +1,6 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
+import TextInput from "../Components/TextInput.vue";
 
 const form = useForm({
     email: null,
@@ -18,22 +19,13 @@ const submit = () => {
 <template>
     <div>Login Page</div>
     <form @submit.prevent="submit">
-        <div>
-            <label for="email">Email: </label>
-            <input type="email" name="email" id="email" v-model="form.email" />
-            <div v-if="form.errors.email">{{ form.errors.email }}</div>
-        </div>
+        <TextInput type="email" name="email" :message="form.errors.email" />
 
-        <div>
-            <label for="password">Password: </label>
-            <input
-                type="password"
-                name="password"
-                id="password"
-                v-model="form.password"
-            />
-            <div v-if="form.errors.password">{{ form.errors.password }}</div>
-        </div>
+        <TextInput
+            type="password"
+            name="password"
+            :message="form.errors.password"
+        />
 
         <button>Submit</button>
     </form>
