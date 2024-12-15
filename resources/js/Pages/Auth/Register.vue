@@ -1,5 +1,6 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
+import TextInput from "../Components/TextInput.vue";
 
 const form = useForm({
     name: null,
@@ -20,38 +21,32 @@ const submit = () => {
 <template>
     <div>Register Page</div>
     <form @submit.prevent="submit">
-        <div>
-            <label for="name">Name: </label>
-            <input type="name" name="name" id="name" v-model="form.name" />
-            <div v-if="form.errors.name">{{ form.errors.name }}</div>
-        </div>
+        <TextInput
+            name="name"
+            v-model="form.name"
+            :message="form.errors.name"
+        />
 
-        <div>
-            <label for="email">Email: </label>
-            <input type="email" name="email" id="email" v-model="form.email" />
-            <div v-if="form.errors.email">{{ form.errors.email }}</div>
-        </div>
+        <TextInput
+            name="email"
+            type="email"
+            v-model="form.email"
+            :message="form.errors.email"
+        />
 
-        <div>
-            <label for="password">Password: </label>
-            <input
-                type="password"
-                name="password"
-                id="password"
-                v-model="form.password"
-            />
-            <div v-if="form.errors.password">{{ form.errors.password }}</div>
-        </div>
+        <TextInput
+            name="password"
+            type="password"
+            v-model="form.password"
+            :message="form.errors.password"
+        />
 
-        <div>
-            <label for="password_confirmation">Confirm Password: </label>
-            <input
-                type="password"
-                name="password_confirmation"
-                id="password_confirmation"
-                v-model="form.password_confirmation"
-            />
-        </div>
+        <TextInput
+            name="password_confirmation"
+            type="password"
+            v-model="form.password_confirmation"
+            :message="form.errors.password_confirmation"
+        />
 
         <button>Submit</button>
     </form>
