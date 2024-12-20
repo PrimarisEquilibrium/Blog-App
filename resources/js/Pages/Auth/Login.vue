@@ -19,12 +19,18 @@ const submit = () => {
 <template>
     <div>Login Page</div>
     <form @submit.prevent="submit">
-        <TextInput type="email" name="email" :message="form.errors.email" />
+        <TextInput
+            type="email"
+            name="email"
+            :message="form.errors.email"
+            v-model="form.email"
+        />
 
         <TextInput
             type="password"
             name="password"
             :message="form.errors.password"
+            v-model="form.password"
         />
 
         <button>Submit</button>
