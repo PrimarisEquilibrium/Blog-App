@@ -10,8 +10,12 @@ const blog = blogProp["blog"];
             <h2>By: {{ blog.author }}</h2>
         </div>
         <hr />
-        <div class="mt-4">
+        <div class="mt-4 mb-4">
             <p>{{ blog.content }}</p>
+        </div>
+        <hr />
+        <div class="mt-4">
+            <span>Comments:</span>
         </div>
     </div>
 </template>

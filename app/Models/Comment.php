@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $table = 'blogs';
+    protected $table = 'comments';
 
     /**
-     * A comment belongs to a post
+     * A comment belongs to a blog
      */
-    public function post()
+    public function blog()
     {
         return $this->belongsTo(Blog::class);
     }
