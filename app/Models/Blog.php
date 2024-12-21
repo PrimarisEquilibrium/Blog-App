@@ -10,7 +10,7 @@ class Blog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author', 'content'];
+    protected $fillable = ['title', 'content'];
 
     /**
      * The table associated with the model.
@@ -25,5 +25,10 @@ class Blog extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

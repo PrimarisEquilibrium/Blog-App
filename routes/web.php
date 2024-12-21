@@ -20,5 +20,5 @@ Route::post("logout", [AuthController::class, "logout"])
     ->name("logout")
     ->middleware("auth");
 
-Route::resource("blogs", BlogController::class)
-    ->middleware("auth");
+Route::resource("blogs", BlogController::class);
+    // ->middleware("auth");

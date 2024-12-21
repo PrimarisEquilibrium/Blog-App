@@ -13,7 +13,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::all()->toArray();
+        $blogs = Blog::with('user')->get();
         return Inertia::render("Blogs/Index", ["blogs" => $blogs]);
     }
 
@@ -32,7 +32,6 @@ class BlogController extends Controller
     {
         $data = $request->validate([
             "title" => ["required", "max:255", "string"],
-            "author" => ["required", "max:255", "string"],
             "content" => ["required", "string"]
         ]);
 
@@ -46,6 +45,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
+        $blog->load("user");
         return Inertia::render("Blogs/Show", ["blog" => $blog]);
     }
 

@@ -11,7 +11,7 @@ const blogs = blogsProp["blogs"];
         <Link :href="route('blogs.show', { id: blog.id })">
             <div class="mt-4 mb-4">
                 <div>{{ blog.title }}</div>
-                <div>By: {{ blog.author }}</div>
+                <div>By: {{ blog.user.name }}</div>
             </div>
         </Link>
         <hr />
