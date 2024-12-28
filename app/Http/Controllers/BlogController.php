@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class BlogController extends Controller
@@ -40,13 +43,40 @@ class BlogController extends Controller
         return to_route("blogs.show", ["blog" => $blog->id]);
     }
 
+    public function storeComment(Request $request)
+    {
+        $data = $request->validate([
+            "blog_id" => ["required", "exists:blogs,id"],
+            "comment" => ["required", "string"]
+        ]);
+
+        Comment::create([
+            "user_id" => Auth::id(),
+            "blog_id" => $data["blog_id"],
+            "content" => $data["comment"]
+        ]);
+
+        return redirect()->back();
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(Blog $blog)
     {
         $blog->load("user");
-        return Inertia::render("Blogs/Show", ["blog" => $blog]);
+        
+        $comments = $blog->comments;
+        $users = [];
+        foreach ($comments as $comment) {
+            array_push($users, User::findOrFail($comment->user_id));
+        }
+
+        return Inertia::render("Blogs/Show", [
+            "blog" => $blog, 
+            "comments" => $comments,
+            "users" => $users
+        ]);
     }
 
     /**

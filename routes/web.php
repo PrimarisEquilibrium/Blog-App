@@ -22,8 +22,10 @@ Route::post("logout", [AuthController::class, "logout"])
     ->name("logout")
     ->middleware("auth");
 
-Route::resource("blogs", BlogController::class);
-    // ->middleware("auth");
+Route::post('/blogs/{blog}', [BlogController::class, 'storeComment'])->name('blogs.store_comment');
+
+Route::resource("blogs", BlogController::class)
+    ->middleware("auth");
 
 Route::get("/dev-login", function() {
     abort_unless(app()->environment("local"), 403);

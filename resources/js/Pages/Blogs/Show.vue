@@ -1,6 +1,24 @@
 <script setup>
-const blogProp = defineProps(["blog"]);
-const blog = blogProp["blog"];
+import { useForm } from "@inertiajs/vue3";
+import TextInput from "../Components/TextInput.vue";
+
+const props = defineProps(["blog", "comments", "users"]);
+const blog = props["blog"];
+const comments = props["comments"];
+const users = props["users"];
+
+const form = useForm({
+    blog_id: blog.id,
+    comment: null,
+});
+
+const submit = () => {
+    form.post(route("blogs.store_comment", { blog: blog.id }), {
+        onError: () => {
+            form.reset("password", "password_confirmation");
+        },
+    });
+};
 </script>
 
 <template>
@@ -16,6 +34,23 @@ const blog = blogProp["blog"];
         <hr />
         <div class="mt-4">
             <span>Comments:</span>
+            <br />
+            <form @submit.prevent="submit">
+                <TextInput
+                    name="comment"
+                    v-model="form.comment"
+                    :message="form.errors.comment"
+                ></TextInput>
+                <div>
+                    <button type="submit">Submit Comment</button>
+                </div>
+            </form>
+            <div>
+                <div v-for="(comment, index) in comments">
+                    {{ users[index].name }}
+                    {{ comment.content }}
+                </div>
+            </div>
         </div>
     </div>
 </template>
