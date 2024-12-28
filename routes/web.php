@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia("/", "Home")->name("home");
@@ -22,3 +24,11 @@ Route::post("logout", [AuthController::class, "logout"])
 
 Route::resource("blogs", BlogController::class);
     // ->middleware("auth");
+
+Route::get("/dev-login", function() {
+    abort_unless(app()->environment("local"), 403);
+
+    Auth::login(User::first());
+
+    return redirect()->to("/");
+})->name("dev-login");
